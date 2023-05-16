@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import instance from "../api/axios";
 //import requests from "../api/requests";
 import "./LoginPage.css"
-import axios from "axios";
+//import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
@@ -11,9 +11,9 @@ export default function LoginPage() {
   const [authId, setAuthId] = useState("");
   const [password, setPassword] = useState("");
   
-  const movePage = useNavigate();
+  const movePage = useNavigate(); 
   const goSignUp = () => {
-    movePage('/users');
+    movePage('/users'); 
   }
 
   const login = async () => {
@@ -29,7 +29,25 @@ export default function LoginPage() {
 
     } catch (error) {
       console.error(error);
-      alert("아이디와 비밀번호를 확인해 주세요!");
+      if (authId === "" & password === "") // 아이디, 비밀번호 모두 공백인 경우
+      {
+        alert("아이디와 비밀번호를 입력해 주세요!");
+      }
+      else if(authId === "") // 아이디가 공백인 경우
+      {
+        alert("아이디를 입력해 주세요!");
+      }
+      else if (password === "") // 비밀번호가 공백인 경우
+      {
+        alert("비밀번호를 입력해 주세요!");
+      }
+      else if (authId === "" & password === "")
+      {
+        alert("아이디와 비밀번호를 입력해 주세요!");
+      }
+      else { // 아이디와 비밀번호가 등록되어 있지 않을 때
+        alert("아이디와 비밀번호를 확인해 주세요!");
+      }
     }
   }
 
@@ -39,10 +57,12 @@ export default function LoginPage() {
         <label>Auth ID</label>
         <input id="authId" className="form-control" required value={authId} onChange={(e) => setAuthId(e.target.value)}/>
       </div>
+
       <div className="form-group">
         <label>Password</label>
         <input type="password" className="form-control" id="password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
       </div>
+      
       <button className="btn" onClick={login}>로그인</button>
       <br></br>
       <button className="btn" onClick={goSignUp}>회원가입</button> 

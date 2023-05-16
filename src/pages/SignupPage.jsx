@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./LoginPage.css";
-import axios from "axios";
+//import axios from "axios";
 import instance from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function SignupPage() {
     const signUp = async () => {
         console.log("sign up start");
         if (auth_id === "" || password === "" || username === "" || email === ""){ // 모든 입력사항 입력 요구
-            return alert ("입력사항을 모두 입력해주세요.");
+            return alert ("입력사항을 모두 입력해 주세요.");
         }
         if (checkingId === false){
             return alert("아이디 중복 확인을 해주세요!"); // 아이디 중복확인 체크 여부 확인
@@ -40,9 +40,8 @@ export default function SignupPage() {
         // 200대 status 통신 성공
         console.log(response);
         console.log("signup!");
-        backLogin();
+        backLogin(); // 회원가입 완료되면 로그인 화면으로 돌아가기
         alert("회원가입이 완료되었습니다!");
-
 
         }
         catch (error) { // 에러 캐치
@@ -61,7 +60,7 @@ export default function SignupPage() {
         try {
             const response = await instance.post('/users/verify', {auth_id: auth_id}); // 아이디 값을 서버로 보내기
             console.log(response);
-            if(checkingId === false){ // 아이디 체크 여부 true로 바꿔주기
+            if(checkingId === false){ // 아이디 중복확인 여부 true로 바꿔주기
                 setcheckingId(current => !current);
             }
             console.log(checkingId);
@@ -69,8 +68,10 @@ export default function SignupPage() {
             }
         
         catch(error){ // 409 conflict 에러 => 아이디 중복임 
+            
             console.log(error);
             alert("중복된 아이디입니다.")
+            
         }
         
     }
