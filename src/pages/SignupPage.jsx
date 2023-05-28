@@ -16,7 +16,7 @@ export default function SignupPage() {
     const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [checkingId, setcheckingId] = useState(false); // 아이디 중복확인 여부
+    const [checkingId, setCheckingId] = useState(false); // 아이디 중복확인 여부
 
     const signUp = async () => {
         console.log("sign up start");
@@ -61,7 +61,7 @@ export default function SignupPage() {
             const response = await instance.post('/users/verify', {auth_id: auth_id}); // 아이디 값을 서버로 보내기
             console.log(response);
             if(checkingId === false){ // 아이디 중복확인 여부 true로 바꿔주기
-                setcheckingId(current => !current);
+                setCheckingId(current => !current);
             }
             console.log(checkingId);
             return alert("사용 가능한 아이디입니다.");

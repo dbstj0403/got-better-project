@@ -5,7 +5,6 @@ import "./LoginPage.css"
 //import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 export default function LoginPage() {
 
   const [authId, setAuthId] = useState("");
@@ -15,6 +14,9 @@ export default function LoginPage() {
   const goSignUp = () => {
     movePage('/users'); 
   }
+  const goRooms = () => {
+    movePage('/rooms');
+  }
 
   const login = async () => {
     try {
@@ -23,9 +25,13 @@ export default function LoginPage() {
         password: password,
       });
 
-      localStorage.setItem('jwt', response.data.jwt);
+        localStorage.setItem('access_token',response.data.access_token);
+        console.log(response.data.access_token);
+        localStorage.setItem('refresh_token', response.data.refresh_token);
         console.log(response);
         alert("로그인 완료!");
+        goRooms();
+
 
     } catch (error) {
       console.error(error);
@@ -40,10 +46,6 @@ export default function LoginPage() {
       else if (password === "") // 비밀번호가 공백인 경우
       {
         alert("비밀번호를 입력해 주세요!");
-      }
-      else if (authId === "" & password === "")
-      {
-        alert("아이디와 비밀번호를 입력해 주세요!");
       }
       else { // 아이디와 비밀번호가 등록되어 있지 않을 때
         alert("아이디와 비밀번호를 확인해 주세요!");
