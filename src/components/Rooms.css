@@ -16,7 +16,7 @@
 
 .userNum{
     position: absolute;
-    left: 1010px;
+    left: 980px;
     font-size: 30px;
     padding-top: 5px;
 }
@@ -31,10 +31,26 @@
     margin-top: 10px;
     background-color: white;
     padding: 10px;
-    position: fixed;
+    position: absolute;
     left: 1300px;
     margin: 10px;
     
+}
+
+.plus{
+    text-align: center;
+    size: 500px;
+}
+
+.plus1{
+    position: relative;
+    right: 260px;
+    
+}
+
+.plus2{
+    position: relative;
+    left: 200px;
 }
 
 
